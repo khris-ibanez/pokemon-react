@@ -1,15 +1,42 @@
-import { useState } from 'react'
+import { useEffect, useState } from "react";
 
-import './Home.css'
+import { fetchPrimerosPokemons } from "../../reducers/prueba";
+import { useDispatch, useSelector } from "react-redux";
+
+import "./Home.css";
 
 function Home() {
-  const [count, setCount] = useState(0)
+  const [pokemonAleatorio, setPokemonAleatorio] = useState();
+  const minimo = 0;
+  const maximo = 150;
+  const { pokemons } = useSelector((state) => state.primerosPokemons);
+  const dispatch = useDispatch();
+  const pokePrimero = pokemons.slice(pokemonAleatorio, pokemonAleatorio + 1);
+  useEffect(() => {
+    if (pokemons.length == 0) {
+      dispatch(fetchPrimerosPokemons());
+    } 
+  }, []);
+  useEffect(() => {
+    setPokemonAleatorio(getRandomIntInclusive(minimo, maximo));
+  }, []);
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let one = 1;
+    return Math.floor(Math.random() * (max - min + one) + min);
+  }
 
-  return (
-    <>
-      <h1>hola pokemon</h1>
-    </>
-  )
+  function copiar(pokemon) {
+    navigator.clipboard.writeText(pokemon);
+  }
+
+  return pokePrimero.map((pokemon, index) => (
+    <div key={index}>
+      <p>{pokemon.name}</p>
+      <button onClick={() => copiar(pokemon.name)}>copiar</button>
+    </div>
+  ));
 }
 
-export default Home
+export default Home;
