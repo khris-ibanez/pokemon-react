@@ -15,12 +15,12 @@ export function Buscador() {
       dispatch(fetchPrimerosPokemons());
     }
   }, []);
-  const pegar = (e) => {
-    e.preventDefault();
-    navigator.clipboard.readText().then((text) => {
-      setInputValue(text);
-    });
-  };
+  // const pegar = (e) => {
+  //   e.preventDefault();
+  //   navigator.clipboard.readText().then((text) => {
+  //     setInputValue(text);
+  //   });
+  // };
   const buscar = (e) => {
     e.preventDefault();
     dispatch(fetchPokemon(inputValue));
@@ -38,7 +38,7 @@ export function Buscador() {
               type="search"
               list="pokes"
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => setInputValue(e.target.value.toLowerCase())}
               placeholder="ditto"
             />
           </label>
@@ -51,7 +51,7 @@ export function Buscador() {
             ))}
           </datalist>
           <button onClick={buscar}>buscar pokemon</button>
-          <button onClick={pegar}>Pegar Texto</button>
+          {/* <button onClick={pegar}>Pegar Texto</button> */}
         </form>
       </article>
 

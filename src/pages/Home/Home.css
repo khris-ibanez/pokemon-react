@@ -1,0 +1,22 @@
+#pokemonId-1{
+    width: 50%;
+    max-width: 300px;
+    filter: blur(15px);
+}
+#pokemonId-2{
+    width: 50%;
+    max-width: 300px;
+    filter: blur(10px);
+}
+#pokemonId-3{
+    width: 50%;
+    max-width: 300px;
+    filter: blur(5px);
+}
+#pokemonId-4{
+    width: 50%;
+    max-width: 300px;
+   
+}
+
+
