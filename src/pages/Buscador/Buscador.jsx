@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { fetchPrimerosPokemons } from "../../reducers/prueba";
 import { fetchPokemon } from "../../reducers/buscador";
 import { setEquipo } from "../../reducers/miEquipo";
+import "./Buscador.css";
 
 export function Buscador() {
   const { pokemons } = useSelector((state) => state.primerosPokemons);
@@ -50,45 +51,51 @@ export function Buscador() {
               </Fragment>
             ))}
           </datalist>
-          <button onClick={buscar}>buscar pokemon</button>
+          <button onClick={buscar}>Buscar</button>
           {/* <button onClick={pegar}>Pegar Texto</button> */}
         </form>
       </article>
 
       <section>
         {poke.name && (
-          <form>
-            <div>
-              <h1>{poke.name}</h1>
-              <h3>Posición en la Pokedex: {poke.id}</h3>
-            </div>
-            <div>
-              <img src={poke.sprites.front_default} alt={poke.name} />
-              <img src={poke.sprites.back_default} alt={poke.name} />
-            </div>
-            <div>
-              <h3>Shiny</h3>
-              <img src={poke.sprites.front_shiny} alt={poke.name} />
-              <img src={poke.sprites.back_shiny} alt={poke.name} />
-            </div>
-            <div>
-              <h4>Tipo</h4>
-              {poke.types.map((type, key) => (
-                <p key={key}>{type.type.name}</p>
-              ))}
-            </div>
-            <div>
-              <h4>Stats</h4>
-              {poke.stats.map((stat, key) => (
-                <p key={key}>
-                  {stat.stat.name} : {stat.base_stat}
-                </p>
-              ))}
-            </div>
+          <>
+            <form>
+              <div>
+                <div>
+                  <h1>{poke.name}</h1>
+                  <h3>Posición en la Pokedex: {poke.id}</h3>
+                </div>
+                <div>
+                  <img src={poke.sprites.front_default} alt={poke.name} />
+                  <img src={poke.sprites.back_default} alt={poke.name} />
+                </div>
+                <div>
+                  <h3>Shiny</h3>
+                  <img src={poke.sprites.front_shiny} alt={poke.name} />
+                  <img src={poke.sprites.back_shiny} alt={poke.name} />
+                </div>
+              </div>
+              <div className="tipo-statsPokemon">
+                <div >
+                  <h4>Tipo</h4>
+                  {poke.types.map((type, key) => (
+                    <p key={key}>{type.type.name}</p>
+                  ))}
+                </div>
+                <div >
+                  <h4>Stats</h4>
+                  {poke.stats.map((stat, key) => (
+                    <p key={key}>
+                      {stat.stat.name} : {stat.base_stat}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </form>
             {equipo.length <= 5 && (
               <button onClick={agregar}>Agregar a mi equipo</button>
             )}
-          </form>
+          </>
         )}
       </section>
     </main>

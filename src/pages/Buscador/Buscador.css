@@ -1,0 +1,15 @@
+article, section{
+    padding-top: 10px;
+    padding-left: 8%;
+}
+
+form{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.tipo-statsPokemon{
+    padding-left: 3%;
+    padding-top: 1%;
+}

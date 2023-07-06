@@ -59,8 +59,12 @@ function Home() {
   };
 
   return (
-    <div>
+    
+    <main id="mainHome">
+
       <label>
+      {idPokemon === 4 &&
+        pokePrimero.map((pokemon, key) => <h1 id="namePokemon" key={key}>{pokemon.name}</h1>)}
         <img id={"pokemonId-" + idPokemon} src={imgPokemon} />
 
         <input
@@ -68,9 +72,9 @@ function Home() {
           onChange={(e) => setIputPokemon(e.target.value.toLowerCase())}
         />
       </label>
-      {idPokemon === 4 &&
-        pokePrimero.map((pokemon, key) => <h1 key={key}>{pokemon.name}</h1>)}
-    </div>
+      
+
+    </main>
   );
 }
 
