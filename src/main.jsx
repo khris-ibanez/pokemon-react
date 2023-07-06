@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Home from "./pages/Home/Home.jsx";
-import "./index.css";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Buscador } from "./pages/Buscador/Buscador.jsx";
 import { MiEquipo } from "./pages/MiEquipo/MiEquipo.jsx";
