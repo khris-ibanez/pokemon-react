@@ -11,11 +11,16 @@ export function Buscador() {
   const { equipo } = useSelector((state) => state.miEquipoPokemon);
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
+  const [disable,setDisable]=useState(false)
   useEffect(() => {
     if (pokemons.length == 0) {
       dispatch(fetchPrimerosPokemons());
     }
   }, []);
+  useEffect(()=>{
+    if(disable)
+    setDisable(false)
+  },[inputValue])
   // const pegar = (e) => {
   //   e.preventDefault();
   //   navigator.clipboard.readText().then((text) => {
@@ -24,6 +29,7 @@ export function Buscador() {
   // };
   const buscar = (e) => {
     e.preventDefault();
+    setDisable(true)
     dispatch(fetchPokemon(inputValue));
   };
   const agregar = (e) => {
@@ -51,7 +57,8 @@ export function Buscador() {
               </Fragment>
             ))}
           </datalist>
-          <button onClick={buscar}>Buscar</button>
+          
+          <button disabled={disable}  onClick={buscar}>Buscar</button>
           {/* <button onClick={pegar}>Pegar Texto</button> */}
         </form>
       </article>
