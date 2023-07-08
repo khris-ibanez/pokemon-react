@@ -7,20 +7,17 @@ import "./Buscador.css";
 
 export function Buscador() {
   const { pokemons } = useSelector((state) => state.primerosPokemons);
-  const { poke } = useSelector((state) => state.endPointBuscador);
+  const { poke, isLoading } = useSelector((state) => state.endPointBuscador);
   const { equipo } = useSelector((state) => state.miEquipoPokemon);
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
-  const [disable,setDisable]=useState(false)
+
   useEffect(() => {
     if (pokemons.length == 0) {
       dispatch(fetchPrimerosPokemons());
     }
   }, []);
-  useEffect(()=>{
-    if(disable)
-    setDisable(false)
-  },[inputValue])
+
   // const pegar = (e) => {
   //   e.preventDefault();
   //   navigator.clipboard.readText().then((text) => {
@@ -29,7 +26,7 @@ export function Buscador() {
   // };
   const buscar = (e) => {
     e.preventDefault();
-    setDisable(true)
+    if (isLoading) return;
     dispatch(fetchPokemon(inputValue));
   };
   const agregar = (e) => {
@@ -57,8 +54,10 @@ export function Buscador() {
               </Fragment>
             ))}
           </datalist>
-          
-          <button disabled={disable}  onClick={buscar}>Buscar</button>
+
+          <button disabled={isLoading}  onClick={buscar}>
+            Buscar
+          </button>
           {/* <button onClick={pegar}>Pegar Texto</button> */}
         </form>
       </article>
@@ -83,13 +82,13 @@ export function Buscador() {
                 </div>
               </div>
               <div className="tipo-statsPokemon">
-                <div >
+                <div>
                   <h4>Tipo</h4>
                   {poke.types.map((type, key) => (
                     <p key={key}>{type.type.name}</p>
                   ))}
                 </div>
-                <div >
+                <div>
                   <h4>Stats</h4>
                   {poke.stats.map((stat, key) => (
                     <p key={key}>
